@@ -46,4 +46,12 @@ public class Hand {
     public void vider() {
         hand.clear();
     }
+
+    public int getNombreCartes() {
+       return hand.size();
+    }
+
+    public Carte getCarte(int index) {
+        return hand.get(index);
+    }
 }

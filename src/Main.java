@@ -3,10 +3,14 @@ import models.Couleur;
 import models.Hand;
 import models.Paquet;
 import models.Valeur;
+import services.JeuBlackjack;
 
 public class Main {
     public static void main(String[] args) {
-     
+        
+        JeuBlackjack jeu = new JeuBlackjack();
+        jeu.jouer();
+        
         // Carte carte1 = new Carte(Couleur.PIQUE, Valeur.AS);
         // Carte carte2 = new Carte(Couleur.COEUR, Valeur.ROI);
         // Carte carte3 = new Carte(Couleur.CARREAU, Valeur.SEPT);
@@ -33,29 +37,29 @@ public class Main {
         
         // System.out.println("\nCartes restantes : " + paquet.getNombreCartesRestantes());
         
-        Hand main = new Hand();
+        // Hand main = new Hand();
         
-        // Test 1 : main normale
-        main.ajouterCarte(new Carte(Couleur.PIQUE, Valeur.AS));
-        main.ajouterCarte(new Carte(Couleur.COEUR, Valeur.NEUF));
-        System.out.println(main);
-        System.out.println("Score : " + main.getScore());  // Doit afficher 20
+        // // Test 1 : main normale
+        // main.ajouterCarte(new Carte(Couleur.PIQUE, Valeur.AS));
+        // main.ajouterCarte(new Carte(Couleur.COEUR, Valeur.NEUF));
+        // System.out.println(main);
+        // System.out.println("Score : " + main.getScore());  // Doit afficher 20
         
-        System.out.println("\n---");
+        // System.out.println("\n---");
         
-        // Test 2 : main avec As qui doit s'adapter
-        main.ajouterCarte(new Carte(Couleur.CARREAU, Valeur.CINQ));
-        System.out.println(main);
-        System.out.println("Score : " + main.getScore());  // Doit afficher 15 (As vaut 1)
+        // // Test 2 : main avec As qui doit s'adapter
+        // main.ajouterCarte(new Carte(Couleur.CARREAU, Valeur.CINQ));
+        // System.out.println(main);
+        // System.out.println("Score : " + main.getScore());  // Doit afficher 15 (As vaut 1)
         
-        System.out.println("\n---");
+        // System.out.println("\n---");
         
-        // Test 3 : nouvelle main
-        main.vider();
-        main.ajouterCarte(new Carte(Couleur.TREFLE, Valeur.ROI));
-        main.ajouterCarte(new Carte(Couleur.COEUR, Valeur.DIX));
-        System.out.println(main);
-        System.out.println("Score : " + main.getScore());  // Doit afficher 20
+        // // Test 3 : nouvelle main
+        // main.vider();
+        // main.ajouterCarte(new Carte(Couleur.TREFLE, Valeur.ROI));
+        // main.ajouterCarte(new Carte(Couleur.COEUR, Valeur.DIX));
+        // System.out.println(main);
+        // System.out.println("Score : " + main.getScore());  // Doit afficher 20
 
     }
 }
