@@ -4,33 +4,27 @@ import models.*;
 import java.util.Scanner;
 
 public class JeuBlackjack {
-    // Attributs
     private Paquet paquet;
     private Hand mainJoueur;
     private Hand mainCroupier;
     private Scanner scanner;
     
-    // Constructeur
     public JeuBlackjack() {
-        // Initialiser paquet, mains, scanner
         paquet = new Paquet();
         mainJoueur = new Hand();
         mainCroupier = new Hand();
         scanner = new Scanner(System.in);
     }
     
-    // Méthode principale
     public void jouer() {
         paquet.melanger();
-        // 1. Distribuer les cartes initiales
         distribuerCartesInitiales();
         afficherMains(true);
-        // 2. Tour du joueur
+        tourJoueur();
         // 3. Tour du croupier
         // 4. Déterminer le gagnant
     }
     
-    // Méthodes privées pour organiser le code
     private void distribuerCartesInitiales() {
               for (int i = 0; i < 2; i++) {
             mainJoueur.ajouterCarte(paquet.distribuerCarte());
@@ -49,9 +43,26 @@ public class JeuBlackjack {
     }
     
     private void tourJoueur() {
-        // Boucle : demander Hit ou Stand
-        // Si Hit, distribuer une carte
-        // Vérifier si bust (> 21)
+        while (mainJoueur.getScore() <= 21) {
+        System.out.print("\nVoulez-vous (H)it ou (S)tand ? ");
+        String choix = scanner.nextLine().trim().toUpperCase();
+        
+        if (choix.equals("H")) {
+            mainJoueur.ajouterCarte(paquet.distribuerCarte());
+            System.out.println("\nVotre main : " + mainJoueur + " (Score : " + mainJoueur.getScore() + ")");
+            if (mainJoueur.getScore() > 21) {
+                System.out.println("\nBUST ! Vous avez dépassé 21.");
+                break;
+                };
+            
+        } else if (choix.equals("S")) {
+            System.out.println("\nVous restez à " + mainJoueur.getScore());
+            break;
+            
+        } else {
+            System.out.println("Choix invalide. Tapez H ou S.");
+        }
+    }
     }
     
     private void tourCroupier() {
