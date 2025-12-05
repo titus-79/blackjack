@@ -21,7 +21,9 @@ public class JeuBlackjack {
         distribuerCartesInitiales();
         afficherMains(true);
         tourJoueur();
-        // 3. Tour du croupier
+        if (mainJoueur.getScore() <= 21) {
+        tourCroupier();
+    }
         // 4. Déterminer le gagnant
     }
     
@@ -66,8 +68,25 @@ public class JeuBlackjack {
     }
     
     private void tourCroupier() {
-        // Règle : tirer tant que score < 17
+    System.out.println("\n=== Tour du Croupier ===");
+    
+    // 1. Révéler la main complète
+    System.out.println("Le croupier révèle sa main : " + mainCroupier + " (Score : " + mainCroupier.getScore() + ")");
+    
+    // 2. Appliquer la règle du 17
+    while (mainCroupier.getScore() < 17) {
+        Carte nouvelleCarte = paquet.distribuerCarte();
+        mainCroupier.ajouterCarte(nouvelleCarte);
+        System.out.println("Le croupier tire : " + nouvelleCarte + " (Score : " + mainCroupier.getScore() + ")");
+}
+    
+    // 3. Afficher le résultat final
+    if (mainCroupier.getScore() > 21) {
+        System.out.println("Le croupier a BUST avec " + mainCroupier.getScore() + " !");
+    } else {
+        System.out.println("Le croupier reste à " + mainCroupier.getScore() + ".");
     }
+}
     
     private void determinerGagnant() {
         // Comparer les scores
