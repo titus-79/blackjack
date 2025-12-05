@@ -54,4 +54,8 @@ public class Hand {
     public Carte getCarte(int index) {
         return hand.get(index);
     }
+
+    public boolean estBlackjackNaturel() {
+        return getNombreCartes() == 2 && getScore() == 21;
+    }
 }

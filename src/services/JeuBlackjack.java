@@ -32,6 +32,13 @@ public class JeuBlackjack {
             mainJoueur.ajouterCarte(paquet.distribuerCarte());
             mainCroupier.ajouterCarte(paquet.distribuerCarte());
         }
+        // // Test Blackjack joueur
+        // mainJoueur.ajouterCarte(new Carte(Couleur.PIQUE, Valeur.AS));
+        // mainJoueur.ajouterCarte(new Carte(Couleur.COEUR, Valeur.ROI));
+
+        // // Main normale croupier
+        // mainCroupier.ajouterCarte(new Carte(Couleur.COEUR, Valeur.ROI));
+        // mainCroupier.ajouterCarte(new Carte(Couleur.PIQUE, Valeur.AS));
     }
 
     private void afficherMains(boolean cacherCarteCroupier) {
@@ -91,11 +98,23 @@ public class JeuBlackjack {
 
         int scoreJoueur = mainJoueur.getScore();
         int scoreCroupier = mainCroupier.getScore();
+        boolean joueurBlackjack = mainJoueur.estBlackjackNaturel();
+        boolean croupierBlackjack = mainCroupier.estBlackjackNaturel();
 
         if (scoreJoueur > 21) {
             System.out.println("Le croupier a gagné ! (Vous avez bust)");
         } else if (scoreCroupier > 21) {
-            System.out.println("Vous avez gagné ! (Le croupier a bust)");
+            if (joueurBlackjack) {
+                System.out.println("BLACKJACK NATUREL ! Vous avez gagné avec un 21 naturel !");
+            } else {
+                System.out.println("Vous avez gagné ! (Le croupier a bust)");
+            }
+        } else if (joueurBlackjack && croupierBlackjack) {
+            System.out.println("PUSH ! Les deux ont un Blackjack naturel !");
+        } else if (joueurBlackjack) {
+            System.out.println("BLACKJACK NATUREL ! Vous avez gagné avec un 21 naturel !");
+        } else if (croupierBlackjack) {
+            System.out.println("Le croupier a gagné avec un Blackjack naturel !");
         } else if (scoreJoueur > scoreCroupier) {
             System.out.println("Vous avez gagné avec un score de " + scoreJoueur + " points !");
         } else if (scoreCroupier > scoreJoueur) {
@@ -120,18 +139,18 @@ public class JeuBlackjack {
             jouerUnePartie();
             System.out.println("Voulez vous rejouer?(O/N)");
             String choix = scanner.nextLine().trim().toUpperCase();
-    
+
             if (choix.equals("O")) {
                 System.out.println("\n" + "=".repeat(50));
                 System.out.println("    NOUVELLE PARTIE");
                 System.out.println("=".repeat(50));
                 reinitialiser();
-    
+
             } else if (choix.equals("N")) {
                 continuer = false;
                 System.out.println("Merci d'avoir joué ! À bientôt !");
                 scanner.close();
-    
+
             } else {
                 System.out.println("Choix invalide. Tapez O ou N.");
             }
