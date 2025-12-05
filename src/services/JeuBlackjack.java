@@ -16,7 +16,7 @@ public class JeuBlackjack {
         scanner = new Scanner(System.in);
     }
 
-    public void jouer() {
+    public void jouerUnePartie() {
         paquet.melanger();
         distribuerCartesInitiales();
         afficherMains(true);
@@ -70,14 +70,15 @@ public class JeuBlackjack {
 
     private void tourCroupier() {
         System.out.println("\n=== Tour du Croupier ===");
-        System.out.println("Le croupier révèle sa main : " + mainCroupier + " (Score : " + mainCroupier.getScore() + ")");
-        
+        System.out
+                .println("Le croupier révèle sa main : " + mainCroupier + " (Score : " + mainCroupier.getScore() + ")");
+
         while (mainCroupier.getScore() < 17) {
             Carte nouvelleCarte = paquet.distribuerCarte();
             mainCroupier.ajouterCarte(nouvelleCarte);
             System.out.println("Le croupier tire : " + nouvelleCarte + " (Score : " + mainCroupier.getScore() + ")");
         }
-        
+
         if (mainCroupier.getScore() > 21) {
             System.out.println("Le croupier a BUST avec " + mainCroupier.getScore() + " !");
         } else {
@@ -105,4 +106,36 @@ public class JeuBlackjack {
 
         System.out.println("Votre score : " + scoreJoueur + " | Croupier : " + scoreCroupier);
     }
+
+    public void reinitialiser() {
+        mainJoueur.vider();
+        mainCroupier.vider();
+        paquet = new Paquet();
+        paquet.melanger();
+    }
+
+    public void jouerPlusieurParties() {
+        boolean continuer = true;
+        while (continuer) {
+            jouerUnePartie();
+            System.out.println("Voulez vous rejouer?(O/N)");
+            String choix = scanner.nextLine().trim().toUpperCase();
+    
+            if (choix.equals("O")) {
+                System.out.println("\n" + "=".repeat(50));
+                System.out.println("    NOUVELLE PARTIE");
+                System.out.println("=".repeat(50));
+                reinitialiser();
+    
+            } else if (choix.equals("N")) {
+                continuer = false;
+                System.out.println("Merci d'avoir joué ! À bientôt !");
+                scanner.close();
+    
+            } else {
+                System.out.println("Choix invalide. Tapez O ou N.");
+            }
+        }
+    }
+
 }

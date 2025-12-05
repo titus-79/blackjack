@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         
         JeuBlackjack jeu = new JeuBlackjack();
-        jeu.jouer();
+        jeu.jouerPlusieurParties();
         
         // Carte carte1 = new Carte(Couleur.PIQUE, Valeur.AS);
         // Carte carte2 = new Carte(Couleur.COEUR, Valeur.ROI);
