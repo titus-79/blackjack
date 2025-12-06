@@ -8,12 +8,20 @@ public class JeuBlackjack {
     private Hand mainJoueur;
     private Hand mainCroupier;
     private Scanner scanner;
+    private int countWin;
+    private int countLose;
+    private int countPush;
+    private int countGame;
 
     public JeuBlackjack() {
         paquet = new Paquet();
         mainJoueur = new Hand();
         mainCroupier = new Hand();
         scanner = new Scanner(System.in);
+        countWin = 0;
+        countLose = 0;
+        countPush = 0;
+        countGame = 0;
     }
 
     public void jouerUnePartie() {
@@ -95,7 +103,7 @@ public class JeuBlackjack {
 
     private void determinerGagnant() {
         System.out.println("\n=== RÉSULTAT ===");
-
+        countGame++;
         int scoreJoueur = mainJoueur.getScore();
         int scoreCroupier = mainCroupier.getScore();
         boolean joueurBlackjack = mainJoueur.estBlackjackNaturel();
@@ -103,27 +111,44 @@ public class JeuBlackjack {
 
         if (scoreJoueur > 21) {
             System.out.println("Le croupier a gagné ! (Vous avez bust)");
+            countLose++;
         } else if (scoreCroupier > 21) {
             if (joueurBlackjack) {
                 System.out.println("BLACKJACK NATUREL ! Vous avez gagné avec un 21 naturel !");
             } else {
                 System.out.println("Vous avez gagné ! (Le croupier a bust)");
             }
+            countWin++;
         } else if (joueurBlackjack && croupierBlackjack) {
             System.out.println("PUSH ! Les deux ont un Blackjack naturel !");
+            countPush++;
         } else if (joueurBlackjack) {
             System.out.println("BLACKJACK NATUREL ! Vous avez gagné avec un 21 naturel !");
+            countWin++;
         } else if (croupierBlackjack) {
             System.out.println("Le croupier a gagné avec un Blackjack naturel !");
+            countLose++;
         } else if (scoreJoueur > scoreCroupier) {
             System.out.println("Vous avez gagné avec un score de " + scoreJoueur + " points !");
+            countWin++;
         } else if (scoreCroupier > scoreJoueur) {
             System.out.println("Le croupier a gagné avec un score de " + scoreCroupier + " points.");
+            countLose++;
         } else {
             System.out.println("PUSH ! Égalité avec " + scoreJoueur + " points.");
+            countPush++;
         }
 
         System.out.println("Votre score : " + scoreJoueur + " | Croupier : " + scoreCroupier);
+        System.out.println("=== STATISTIQUES ===");
+        System.out.println("Victoires : " + countWin);
+        System.out.println("Défaites : " + countLose);
+        System.out.println("Égalités : " + countPush);
+        System.out.println("─".repeat(25));
+        System.out.println("Total parties : " + countGame + " parties");
+        double tauxVictoire = (countGame > 0) ? (countWin * 100.0 / countGame) : 0;
+        System.out.printf("Taux de victoire : %.1f%%\n", tauxVictoire);
+
     }
 
     public void reinitialiser() {
