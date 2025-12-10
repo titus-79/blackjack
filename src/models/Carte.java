@@ -8,7 +8,7 @@ public class Carte {
         this.couleur = couleur;
         this.valeur = valeur;
     }
-    
+
     public int getValue() {
         return valeur.getValeurNumerique();
     }
@@ -16,11 +16,11 @@ public class Carte {
     public Couleur getCouleur() {
         return couleur;
     }
-    
+
     public Valeur getValeur() {
         return valeur;
     }
-    
+
     @Override
     public String toString() {
         return valeur + " de " + couleur;

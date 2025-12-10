@@ -3,16 +3,16 @@ package models;
 import java.util.ArrayList;
 
 public class Hand {
-    
+
     private ArrayList<Carte> hand = new ArrayList<>();
 
     public Hand() {
     }
-    
+
     public void ajouterCarte(Carte carte) {
         hand.add(carte);
     }
-    
+
     public int getScore() {
         int score = 0;
         int nbAs = 0;
@@ -30,25 +30,25 @@ public class Hand {
         }
         return score;
     }
-    
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i< hand.size(); i++) {
-           sb.append(hand.get(i));
-           if (i < hand.size() - 1) {
-            sb.append(", ");
-           }
+        for (int i = 0; i < hand.size(); i++) {
+            sb.append(hand.get(i));
+            if (i < hand.size() - 1) {
+                sb.append(", ");
+            }
         }
         return sb.toString();
     }
-    
+
     public void vider() {
         hand.clear();
     }
 
     public int getNombreCartes() {
-       return hand.size();
+        return hand.size();
     }
 
     public Carte getCarte(int index) {

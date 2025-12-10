@@ -1,21 +1,20 @@
 package models;
 
 public enum Couleur {
-      PIQUE("Pique"),
-      COEUR("Coeur"),
-      CARREAU("Carreau"),
-      TREFLE("Trefle");
+   PIQUE("Pique"),
+   COEUR("Coeur"),
+   CARREAU("Carreau"),
+   TREFLE("Trefle");
 
-      private String nom;
+   private String nom;
 
-      Couleur(String nom) {
-         this.nom = nom;
-      }
+   Couleur(String nom) {
+      this.nom = nom;
+   }
 
-      @Override
+   @Override
 
-      public String toString() {
-         return nom;
-      }
+   public String toString() {
+      return nom;
+   }
 }
-
